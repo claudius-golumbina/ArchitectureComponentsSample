@@ -1,0 +1,57 @@
+apply plugin: 'com.android.application'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-android-extensions'
+apply plugin: 'kotlin-kapt'
+
+android {
+    compileSdkVersion 27
+    defaultConfig {
+        applicationId "com.example.claudius.myapplication"
+        minSdkVersion 21
+        targetSdkVersion 27
+        versionCode 1
+        versionName "1.0"
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+    testOptions {
+        unitTests.returnDefaultValues = true
+    }
+}
+
+dependencies {
+    def work_version = "1.0.0-alpha01"
+    def lifecycle_version = "1.1.1"
+
+    // WorkManager
+    implementation "android.arch.work:work-runtime-ktx:$work_version"
+    // optional - Firebase JobDispatcher support
+    implementation "android.arch.work:work-firebase:$work_version"
+    // optional - Test helpers
+    androidTestImplementation "android.arch.work:work-testing:$work_version"
+
+    // ViewModel and LiveData
+    implementation "android.arch.lifecycle:extensions:$lifecycle_version"
+    kapt "android.arch.lifecycle:compiler:$lifecycle_version"
+    // optional - ReactiveStreams support for LiveData
+    implementation "android.arch.lifecycle:reactivestreams:$lifecycle_version"
+    // optional - Test helpers for LiveData
+    testImplementation "android.arch.core:core-testing:$lifecycle_version"
+
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+    implementation 'com.android.support:appcompat-v7:27.1.1'
+    implementation 'com.android.support:design:27.1.1'
+    implementation 'com.android.support.constraint:constraint-layout:1.1.0'
+    implementation "com.squareup.okhttp3:okhttp:3.10.0"
+    testImplementation 'com.squareup.okhttp3:mockwebserver:3.10.0'
+    testImplementation 'junit:junit:4.12'
+    testImplementation 'com.github.tomakehurst:wiremock:2.14.0'
+    androidTestImplementation 'com.android.support.test:runner:1.0.2'
+    androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
+}
