@@ -8,7 +8,7 @@ import androidx.work.WorkManager
 import androidx.work.WorkStatus
 
 class SleepyWorkScheduler(private val requestProvider: RequestProvider) {
-
+    @Deprecated("Use a ViewModel", ReplaceWith("scheduleWork().observe(lifecycleOwner, observer)"))
     fun observeWork(lifecycleOwner: LifecycleOwner, observer: Observer<List<WorkStatus>>) {
         scheduleWork().observe(lifecycleOwner, observer)
     }
@@ -31,6 +31,7 @@ class SleepyWorkScheduler(private val requestProvider: RequestProvider) {
         }
     }
 
+    @SuppressWarnings("unused")
     fun cancelWork() {
         with(WorkManager.getInstance()) {
             ALL_TAGS.forEach { cancelAllWorkByTag(it) }

@@ -1,3 +1,6 @@
 package com.katzoft.archcomponents.sample.main
 
-interface MainView
+interface MainView {
+    fun enableSwitch(tag: String)
+    fun checkSwitch(tag: String)
+}

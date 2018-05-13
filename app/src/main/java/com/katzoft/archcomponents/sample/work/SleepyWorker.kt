@@ -3,6 +3,9 @@ package com.katzoft.archcomponents.sample.work
 import androidx.work.Worker
 import timber.log.Timber
 
+/**
+ * A simple Worker that just sleeps for the time given (default 1 second)
+ */
 class SleepyWorker : Worker() {
     override fun doWork(): WorkerResult {
         Timber.d("Started $id")
