@@ -1,4 +1,4 @@
-package com.example.claudius.myapplication
+package com.katzoft.archcomponents.sample
 
 import okhttp3.OkHttpClient
 import okhttp3.Request
