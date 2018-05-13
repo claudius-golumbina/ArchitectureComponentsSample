@@ -37,5 +37,4 @@ class MainPresenter {
 
     private fun buildLogString(it: WorkStatus) = "Updated state is ${it.state.name} for ${it.tags}"
 
-
 }

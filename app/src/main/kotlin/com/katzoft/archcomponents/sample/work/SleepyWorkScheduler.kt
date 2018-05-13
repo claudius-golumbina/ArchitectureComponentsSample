@@ -25,6 +25,7 @@ class SleepyWorkScheduler(private val requestProvider: RequestProvider) {
             val continuationAB = beginWith(workA1, workA2).then(workB)
             val continuationCD = beginWith(workC).then(workD)
             val continuationE = WorkContinuation.combine(continuationAB, continuationCD).then(workE)
+
             continuationE.enqueue()
 
             return continuationE.statuses
