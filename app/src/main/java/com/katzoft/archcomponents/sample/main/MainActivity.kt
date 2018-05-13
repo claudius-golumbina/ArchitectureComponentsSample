@@ -1,4 +1,4 @@
-package com.katzoft.archcomponents.sample
+package com.katzoft.archcomponents.sample.main
 
 import android.arch.lifecycle.Observer
 import android.arch.lifecycle.ViewModelProviders
@@ -9,6 +9,7 @@ import android.view.Menu
 import android.widget.Switch
 import androidx.work.State
 import androidx.work.WorkStatus
+import com.katzoft.archcomponents.sample.R
 import com.katzoft.archcomponents.sample.work.SleepyWorkScheduler
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.content_main.*

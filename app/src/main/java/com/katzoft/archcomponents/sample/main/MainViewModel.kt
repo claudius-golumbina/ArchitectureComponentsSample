@@ -1,4 +1,4 @@
-package com.katzoft.archcomponents.sample
+package com.katzoft.archcomponents.sample.main
 
 import android.arch.lifecycle.LiveData
 import android.arch.lifecycle.MutableLiveData

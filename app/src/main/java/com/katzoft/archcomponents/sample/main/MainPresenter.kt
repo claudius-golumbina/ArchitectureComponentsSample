@@ -1,4 +1,4 @@
-package com.katzoft.archcomponents.sample
+package com.katzoft.archcomponents.sample.main
 
 class MainPresenter {
 
