@@ -1,13 +1,13 @@
 package com.katzoft.archcomponents.sample.work
 
-import android.util.Log
 import androidx.work.Worker
+import timber.log.Timber
 
 class SleepyWorker : Worker() {
     override fun doWork(): WorkerResult {
-        Log.d("SleepyWorker", "Started $id")
+        Timber.d("Started $id")
         Thread.sleep(inputData.getLong(SLEEP_TIME_MILLIS, 1000))
-        Log.d("SleepyWorker", "Finished $id")
+        Timber.d("Finished $id")
         return WorkerResult.SUCCESS
     }
 
