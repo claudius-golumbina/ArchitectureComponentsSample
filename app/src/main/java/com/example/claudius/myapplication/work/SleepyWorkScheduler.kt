@@ -1,17 +1,19 @@
 package com.example.claudius.myapplication.work
 
 import android.arch.lifecycle.LifecycleOwner
+import android.arch.lifecycle.LiveData
 import android.arch.lifecycle.Observer
-import androidx.work.ExistingWorkPolicy
 import androidx.work.WorkContinuation
 import androidx.work.WorkManager
 import androidx.work.WorkStatus
 
-class SleepyWorkScheduler(private val requestProvider: RequestProvider,
-                          private val lifecycleOwner: LifecycleOwner,
-                          private val observer: Observer<MutableList<WorkStatus>>) {
+class SleepyWorkScheduler(private val requestProvider: RequestProvider) {
 
-    fun scheduleWork() {
+    fun observeWork(lifecycleOwner: LifecycleOwner, observer: Observer<List<WorkStatus>>) {
+        scheduleWork().observe(lifecycleOwner, observer)
+    }
+
+    fun scheduleWork(): LiveData<List<WorkStatus>> {
         val workA1 = requestProvider.getRequest(tag = TAG_A1)
         val workA2 = requestProvider.getRequest(tag = TAG_A2)
         val workB = requestProvider.getRequest(tag = TAG_B)
@@ -20,12 +22,12 @@ class SleepyWorkScheduler(private val requestProvider: RequestProvider,
         val workE = requestProvider.getRequest(tag = TAG_E)
 
         with(WorkManager.getInstance()) {
-            val continuationA = beginUniqueWork(TAG_SYNC, ExistingWorkPolicy.KEEP, workA1, workA2)
-            val continuationAB = continuationA.then(workB)
+            val continuationAB = beginWith(workA1, workA2).then(workB)
             val continuationCD = beginWith(workC).then(workD)
             val continuationE = WorkContinuation.combine(continuationAB, continuationCD).then(workE)
             continuationE.enqueue()
-            continuationE.statuses.observe(lifecycleOwner, observer)
+
+            return continuationE.statuses
         }
     }
 
@@ -45,6 +47,8 @@ class SleepyWorkScheduler(private val requestProvider: RequestProvider,
         const val TAG_E = "e"
         val ALL_TAGS = arrayOf(TAG_A1, TAG_A2, TAG_B, TAG_C, TAG_D, TAG_E)
         const val TAG_SYNC = "sync"
+        const val TAG_AB = "ab"
+        const val TAG_CD = "cd"
     }
 
 

@@ -5,9 +5,9 @@ import androidx.work.Worker
 
 class SleepyWorker : Worker() {
     override fun doWork(): WorkerResult {
-        Log.d("SleepyWorker", "Started")
+        Log.d("SleepyWorker", "Started $id")
         Thread.sleep(inputData.getLong(SLEEP_TIME_MILLIS, 1000))
-        Log.d("SleepyWorker", "Finished")
+        Log.d("SleepyWorker", "Finished $id")
         return WorkerResult.SUCCESS
     }
 
