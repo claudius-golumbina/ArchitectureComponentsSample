@@ -1,10 +1,11 @@
-package com.katzoft.archcomponents.sample.main
+package com.katzoft.archcomponents.sample.main.view
 
 import android.arch.lifecycle.ViewModelProviders
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.widget.Switch
 import com.katzoft.archcomponents.sample.R
+import com.katzoft.archcomponents.sample.main.viewmodel.MainViewModel
 import com.katzoft.archcomponents.sample.work.SleepyWorkScheduler
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.content_main.*

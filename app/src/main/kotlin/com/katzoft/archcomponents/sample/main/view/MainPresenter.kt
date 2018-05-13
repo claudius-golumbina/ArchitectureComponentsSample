@@ -1,18 +1,19 @@
-package com.katzoft.archcomponents.sample.main
+package com.katzoft.archcomponents.sample.main.view
 
 import android.arch.lifecycle.Observer
 import androidx.work.State
 import androidx.work.WorkStatus
+import com.katzoft.archcomponents.sample.Presenter
 import timber.log.Timber
 
-class MainPresenter {
-    private var view: MainView? = null
+class MainPresenter : Presenter<MainView> {
+    override var view: MainView? = null
 
-    fun bind(view: MainView) {
+    override fun bind(view: MainView) {
         this.view = view
     }
 
-    fun unbind() {
+    override fun unbind() {
         view = null
     }
 
