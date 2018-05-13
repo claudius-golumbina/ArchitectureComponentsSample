@@ -4,7 +4,6 @@ import android.arch.lifecycle.Observer
 import androidx.work.State
 import androidx.work.WorkStatus
 import com.katzoft.archcomponents.sample.Presenter
-import timber.log.Timber
 
 class MainPresenter : Presenter<MainView> {
     override var view: MainView? = null
@@ -19,7 +18,6 @@ class MainPresenter : Presenter<MainView> {
 
     fun observer(): Observer<List<WorkStatus>> = Observer {
         it?.let {
-            it.forEach { log(it) }
             it.filter { it.state == State.RUNNING }.forEach {
                 it.tags.forEach { view?.enableSwitch(it) }
             }
@@ -31,11 +29,4 @@ class MainPresenter : Presenter<MainView> {
             }
         }
     }
-
-    private fun log(it: WorkStatus) {
-        Timber.d(buildLogString(it))
-    }
-
-    private fun buildLogString(it: WorkStatus) = "Updated state is ${it.state.name} for ${it.tags}"
-
 }

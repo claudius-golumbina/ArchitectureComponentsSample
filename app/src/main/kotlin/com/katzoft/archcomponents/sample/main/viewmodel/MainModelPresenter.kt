@@ -1,11 +1,12 @@
 package com.katzoft.archcomponents.sample.main.viewmodel
 
 import android.arch.lifecycle.LiveData
-import android.arch.lifecycle.MutableLiveData
+import android.arch.lifecycle.Transformations
 import androidx.work.WorkStatus
 import com.katzoft.archcomponents.sample.Presenter
 import com.katzoft.archcomponents.sample.work.SleepyRequestProvider
 import com.katzoft.archcomponents.sample.work.SleepyWorkScheduler
+import timber.log.Timber
 
 class MainModelPresenter : Presenter<MainModelView> {
     override var view: MainModelView? = null
@@ -21,13 +22,25 @@ class MainModelPresenter : Presenter<MainModelView> {
 
     fun getData(): LiveData<List<WorkStatus>>? {
         if (data == null) {
-            data = MutableLiveData()
             loadData()
         }
         return data
     }
 
     private fun loadData() {
-        data = SleepyWorkScheduler(requestProvider = SleepyRequestProvider()).scheduleWork()
+        data = Transformations.map(doLoadData(),
+                {
+                    it.map {
+                        log(it)
+                        it
+                    }
+                })
     }
+
+    private fun doLoadData() =
+            SleepyWorkScheduler(requestProvider = SleepyRequestProvider()).scheduleWork()
+
+    private fun log(it: WorkStatus) = Timber.d(buildLogString(it))
+
+    private fun buildLogString(it: WorkStatus) = "Updated state is ${it.state.name} for ${it.tags}"
 }
