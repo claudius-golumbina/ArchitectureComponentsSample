@@ -1,5 +1,3 @@
 package com.katzoft.archcomponents.sample
 
-interface MainView {
-
-}
+interface MainView

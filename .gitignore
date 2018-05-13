@@ -60,6 +60,3 @@ fastlane/Preview.html
 fastlane/screenshots
 fastlane/test_output
 fastlane/readme.md
-app/libs/
-app/src/main/java/com/katzoft/
-app/src/main/res/menu/
