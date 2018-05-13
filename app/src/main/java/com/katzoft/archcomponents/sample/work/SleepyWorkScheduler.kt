@@ -34,7 +34,6 @@ class SleepyWorkScheduler(private val requestProvider: RequestProvider) {
     fun cancelWork() {
         with(WorkManager.getInstance()) {
             ALL_TAGS.forEach { cancelAllWorkByTag(it) }
-            cancelUniqueWork(TAG_SYNC)
         }
     }
 
@@ -46,10 +45,5 @@ class SleepyWorkScheduler(private val requestProvider: RequestProvider) {
         const val TAG_D = "d"
         const val TAG_E = "e"
         val ALL_TAGS = arrayOf(TAG_A1, TAG_A2, TAG_B, TAG_C, TAG_D, TAG_E)
-        const val TAG_SYNC = "sync"
-        const val TAG_AB = "ab"
-        const val TAG_CD = "cd"
     }
-
-
 }
